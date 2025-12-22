@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import type { User } from '@/lib/types/user';
@@ -12,7 +13,6 @@ import {
   Users,
   Settings,
   Headphones,
-  Plane,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -77,8 +77,14 @@ export function Sidebar({ user }: { user: User }) {
   return (
     <aside className="flex w-64 flex-col border-r border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950">
       <div className="flex h-16 items-center gap-2 border-b border-slate-200 px-6 dark:border-slate-800">
-        <Plane className="h-5 w-5 text-primary" />
-        <h1 className="text-xl font-bold text-slate-900">TravelPortal</h1>
+        <Image
+          src="/images/logo.png"
+          alt="TravelPortal Logo"
+          width={48}
+          height={48}
+          className="h-10 w-10 object-contain"
+        />
+        <h1 className="text-base font-bold text-slate-900">TravelPortal</h1>
       </div>
       <nav className="flex-1 space-y-1 p-4">
         {filteredNavItems.map((item) => {

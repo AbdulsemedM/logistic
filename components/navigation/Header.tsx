@@ -1,14 +1,19 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import type { User } from '@/lib/types/user';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, Bell, LogOut } from 'lucide-react';
+import { Search, Bell, LogOut, User as UserIcon, Settings } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export function Header({ user }: { user: User }) {
   const router = useRouter();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const avatarRef = useRef<HTMLDivElement>(null);
+
   const roleLabels: Record<string, string> = {
     branch_officer: 'Branch Officer',
     operations: 'Operations',
@@ -21,6 +26,28 @@ export function Header({ user }: { user: User }) {
     router.push('/login');
     router.refresh();
   };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        avatarRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        !avatarRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   return (
     <header className="flex h-16 items-center justify-between border-b border-slate-200 bg-white px-6 dark:border-slate-800 dark:bg-slate-950">
@@ -48,18 +75,75 @@ export function Header({ user }: { user: User }) {
             <span className="text-xs text-slate-600">{user.branch}</span>
           )}
         </div>
-        <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
-          {user.name.charAt(0).toUpperCase()}
+        <div className="relative">
+          <div
+            ref={avatarRef}
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold cursor-pointer hover:opacity-90 transition-opacity"
+          >
+            {user.name.charAt(0).toUpperCase()}
+          </div>
+          
+          {isDropdownOpen && (
+            <div
+              ref={dropdownRef}
+              className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-slate-200 z-50 overflow-hidden"
+            >
+              <div className="p-4 border-b border-slate-200">
+                <div className="flex items-center gap-3">
+                  <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold text-lg">
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-slate-900 truncate">{user.name}</p>
+                    <p className="text-sm text-slate-600 truncate">{user.email}</p>
+                    {user.branch && (
+                      <p className="text-xs text-slate-500 mt-0.5">{user.branch}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-3">
+                  <Badge className="bg-primary/10 text-primary border-0 text-xs">
+                    {roleLabels[user.role] || user.role}
+                  </Badge>
+                </div>
+              </div>
+              
+              <div className="py-2">
+                <button
+                  className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3 transition-colors"
+                  onClick={() => {
+                    setIsDropdownOpen(false);
+                    // Add profile/settings navigation here if needed
+                  }}
+                >
+                  <UserIcon className="h-4 w-4 text-slate-500" />
+                  <span>Profile</span>
+                </button>
+                <button
+                  className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-3 transition-colors"
+                  onClick={() => {
+                    setIsDropdownOpen(false);
+                    // Add settings navigation here if needed
+                  }}
+                >
+                  <Settings className="h-4 w-4 text-slate-500" />
+                  <span>Settings</span>
+                </button>
+              </div>
+              
+              <div className="border-t border-slate-200 py-2">
+                <button
+                  className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors"
+                  onClick={handleLogout}
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleLogout}
-          className="h-9 w-9 text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-          title="Logout"
-        >
-          <LogOut className="h-5 w-5" />
-        </Button>
       </div>
     </header>
   );
