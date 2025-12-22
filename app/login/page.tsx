@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,87 @@ export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
+  // Check if user is already logged in and redirect to dashboard
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/me');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.user) {
+            // User is already logged in, redirect to dashboard
+            router.replace('/dashboard');
+            return;
+          }
+        }
+      } catch (error) {
+        // Not logged in, continue with login page
+      } finally {
+        setIsCheckingAuth(false);
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
+  // Prevent browser navigation (back/forward buttons) on login page
+  // Only when user is NOT logged in
+  useEffect(() => {
+    if (isCheckingAuth) return;
+
+    // Check if user is logged in
+    const checkLoggedIn = async () => {
+      try {
+        const response = await fetch('/api/auth/me');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.user) {
+            // User is logged in, don't prevent navigation (they'll be redirected by middleware)
+            return;
+          }
+        }
+      } catch {
+        // Not logged in, continue with prevention
+      }
+
+      // Only prevent navigation if user is NOT logged in
+      // Store the initial URL
+      const loginUrl = window.location.href;
+      
+      // Replace current history entry to prevent back navigation
+      window.history.replaceState({ preventBack: true }, '', loginUrl);
+
+      // Listen for popstate events (back/forward button clicks)
+      const handlePopState = (event: PopStateEvent) => {
+        // If navigating away from login, allow it (user might be going forward)
+        if (window.location.pathname !== '/login') {
+          return;
+        }
+
+        // If trying to go back from login page, prevent it
+        if (event.state?.preventBack !== true) {
+          // User tried to go back, prevent it
+          window.history.pushState({ preventBack: true }, '', loginUrl);
+          toast.info('Please use the login form to access the application');
+        }
+      };
+
+      // Push a new state to mark this as the login entry point
+      window.history.pushState({ preventBack: true }, '', loginUrl);
+
+      // Add event listener
+      window.addEventListener('popstate', handlePopState);
+
+      // Cleanup
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    };
+
+    checkLoggedIn();
+  }, [isCheckingAuth]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +121,18 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  // Show loading state while checking authentication
+  if (isCheckingAuth) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-white">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-slate-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen">

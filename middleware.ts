@@ -7,6 +7,11 @@ export function middleware(request: NextRequest) {
   const isApiRoute = request.nextUrl.pathname.startsWith('/api');
   const isRoot = request.nextUrl.pathname === '/';
 
+  // If user is logged in and tries to access login page, redirect to dashboard
+  if (isLoginPage && sessionCookie) {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
+  }
+
   // Allow API routes, login page, and root (which redirects)
   if (isApiRoute || isLoginPage || isRoot) {
     return NextResponse.next();
