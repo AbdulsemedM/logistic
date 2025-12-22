@@ -1,0 +1,79 @@
+[
+  {
+    "id": "audit-1",
+    "userId": "user-1",
+    "userName": "John Smith",
+    "userRole": "branch_officer",
+    "action": "login",
+    "resourceType": "system",
+    "resourceId": "system",
+    "details": {},
+    "timestamp": "2024-12-10T08:00:00Z"
+  },
+  {
+    "id": "audit-2",
+    "userId": "user-1",
+    "userName": "John Smith",
+    "userRole": "branch_officer",
+    "action": "request_submitted",
+    "resourceType": "request",
+    "resourceId": "req-1",
+    "details": {
+      "requestId": "req-1",
+      "applicantName": "Ahmed Hassan"
+    },
+    "timestamp": "2024-12-10T10:15:00Z"
+  },
+  {
+    "id": "audit-3",
+    "userId": "user-1",
+    "userName": "John Smith",
+    "userRole": "branch_officer",
+    "action": "recommendation_added",
+    "resourceType": "request",
+    "resourceId": "req-2",
+    "details": {
+      "requestId": "req-2",
+      "recommendation": "Account history looks good. All documents verified."
+    },
+    "timestamp": "2024-12-09T14:30:00Z"
+  },
+  {
+    "id": "audit-4",
+    "userId": "user-3",
+    "userName": "Michael Chen",
+    "userRole": "operations",
+    "action": "request_reviewed",
+    "resourceType": "request",
+    "resourceId": "req-2",
+    "details": {
+      "requestId": "req-2",
+      "status": "under_review"
+    },
+    "timestamp": "2024-12-09T10:00:00Z"
+  },
+  {
+    "id": "audit-5",
+    "userId": "user-3",
+    "userName": "Michael Chen",
+    "userRole": "operations",
+    "action": "request_escalated",
+    "resourceType": "request",
+    "resourceId": "req-3",
+    "details": {
+      "requestId": "req-3",
+      "escalationReason": "High-risk transaction pattern detected. Requires Ops Head review."
+    },
+    "timestamp": "2024-12-07T15:30:00Z"
+  }
+]
+
+
+
+
+
+
+
+
+
+

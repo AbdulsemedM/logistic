@@ -1,0 +1,93 @@
+'use server';
+
+import { cookies } from 'next/headers';
+import type { User, AuthSession, UserRole } from './types/user';
+import usersData from './mock-data/users.json';
+
+const SESSION_COOKIE = 'travler-card-session';
+const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
+export async function login(username: string, password: string): Promise<{ success: boolean; user?: User; error?: string }> {
+  // Mock authentication - in real app, verify password
+  const userData = usersData.find((u) => u.username === username && u.isActive);
+  
+  if (!userData) {
+    return { success: false, error: 'Invalid username or password' };
+  }
+
+  // Mock password check (accept any password for demo)
+  if (password.length < 3) {
+    return { success: false, error: 'Invalid username or password' };
+  }
+
+  const user: User = {
+    ...userData,
+    role: userData.role as UserRole,
+  };
+
+  const session: AuthSession = {
+    user,
+    token: `mock-token-${user.id}-${Date.now()}`,
+    expiresAt: Date.now() + SESSION_DURATION,
+  };
+
+  const cookieStore = await cookies();
+  cookieStore.set(SESSION_COOKIE, JSON.stringify(session), {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: SESSION_DURATION / 1000,
+  });
+
+  return { success: true, user };
+}
+
+export async function logout(): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.delete(SESSION_COOKIE);
+}
+
+export async function getSession(): Promise<AuthSession | null> {
+  const cookieStore = await cookies();
+  const sessionCookie = cookieStore.get(SESSION_COOKIE);
+
+  if (!sessionCookie?.value) {
+    return null;
+  }
+
+  try {
+    const session: AuthSession = JSON.parse(sessionCookie.value);
+    
+    // Check if session expired
+    if (session.expiresAt < Date.now()) {
+      await logout();
+      return null;
+    }
+
+    return session;
+  } catch {
+    return null;
+  }
+}
+
+export async function getCurrentUser(): Promise<User | null> {
+  const session = await getSession();
+  return session?.user ?? null;
+}
+
+export async function requireAuth(): Promise<User> {
+  const user = await getCurrentUser();
+  if (!user) {
+    throw new Error('Unauthorized');
+  }
+  return user;
+}
+
+export async function requireRole(allowedRoles: UserRole[]): Promise<User> {
+  const user = await requireAuth();
+  if (!allowedRoles.includes(user.role)) {
+    throw new Error('Forbidden');
+  }
+  return user;
+}
+

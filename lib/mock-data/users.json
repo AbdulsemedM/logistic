@@ -1,0 +1,68 @@
+[
+  {
+    "id": "user-1",
+    "username": "branch.officer1",
+    "email": "branch.officer1@travlercard.com",
+    "role": "branch_officer",
+    "name": "John Smith",
+    "branch": "Main Branch",
+    "isActive": true,
+    "createdAt": "2024-01-15T10:00:00Z"
+  },
+  {
+    "id": "user-2",
+    "username": "branch.officer2",
+    "email": "branch.officer2@travlercard.com",
+    "role": "branch_officer",
+    "name": "Sarah Johnson",
+    "branch": "Downtown Branch",
+    "isActive": true,
+    "createdAt": "2024-02-01T10:00:00Z"
+  },
+  {
+    "id": "user-3",
+    "username": "operations1",
+    "email": "operations1@travlercard.com",
+    "role": "operations",
+    "name": "Michael Chen",
+    "isActive": true,
+    "createdAt": "2024-01-10T10:00:00Z"
+  },
+  {
+    "id": "user-4",
+    "username": "operations2",
+    "email": "operations2@travlercard.com",
+    "role": "operations",
+    "name": "Emily Davis",
+    "isActive": true,
+    "createdAt": "2024-01-20T10:00:00Z"
+  },
+  {
+    "id": "user-5",
+    "username": "ops.head",
+    "email": "ops.head@travlercard.com",
+    "role": "ops_head",
+    "name": "Robert Wilson",
+    "isActive": true,
+    "createdAt": "2024-01-05T10:00:00Z"
+  },
+  {
+    "id": "user-6",
+    "username": "admin",
+    "email": "admin@travlercard.com",
+    "role": "admin",
+    "name": "Admin User",
+    "isActive": true,
+    "createdAt": "2024-01-01T10:00:00Z"
+  }
+]
+
+
+
+
+
+
+
+
+
+

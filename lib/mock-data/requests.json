@@ -1,0 +1,277 @@
+[
+  {
+    "id": "req-1",
+    "applicantName": "Ahmed Hassan",
+    "applicantEmail": "ahmed.hassan@email.com",
+    "applicantPhone": "+1234567890",
+    "travelReason": "Business conference in Dubai",
+    "destination": "Dubai, UAE",
+    "travelDate": "2024-12-20",
+    "returnDate": "2024-12-25",
+    "status": "pending",
+    "documents": [
+      {
+        "id": "doc-1",
+        "type": "passport",
+        "url": "/api/placeholder/800/600",
+        "uploadedAt": "2024-12-10T10:00:00Z",
+        "verified": true
+      },
+      {
+        "id": "doc-2",
+        "type": "visa",
+        "url": "/api/placeholder/800/600",
+        "uploadedAt": "2024-12-10T10:05:00Z",
+        "verified": true
+      },
+      {
+        "id": "doc-3",
+        "type": "kyc",
+        "url": "/api/placeholder/800/600",
+        "uploadedAt": "2024-12-10T10:10:00Z",
+        "verified": true
+      }
+    ],
+    "accountInfo": {
+      "accountNumber": "ACC-123456789",
+      "accountHolder": "Ahmed Hassan",
+      "bankName": "National Bank",
+      "sixMonthAverage": 12500.50,
+      "currentBalance": 13200.75,
+      "monthlyBalances": [
+        { "month": "2024-06", "balance": 11000 },
+        { "month": "2024-07", "balance": 12000 },
+        { "month": "2024-08", "balance": 12500 },
+        { "month": "2024-09", "balance": 13000 },
+        { "month": "2024-10", "balance": 12800 },
+        { "month": "2024-11", "balance": 12500 }
+      ]
+    },
+    "recommendations": [],
+    "history": [
+      {
+        "id": "hist-1",
+        "action": "submitted",
+        "userId": "user-1",
+        "userName": "John Smith",
+        "role": "branch_officer",
+        "status": "pending",
+        "timestamp": "2024-12-10T10:15:00Z"
+      }
+    ],
+    "amlFlags": [],
+    "submittedAt": "2024-12-10T10:15:00Z"
+  },
+  {
+    "id": "req-2",
+    "applicantName": "Maria Garcia",
+    "applicantEmail": "maria.garcia@email.com",
+    "applicantPhone": "+1987654321",
+    "travelReason": "Family vacation",
+    "destination": "Paris, France",
+    "travelDate": "2024-12-22",
+    "returnDate": "2024-12-30",
+    "status": "under_review",
+    "documents": [
+      {
+        "id": "doc-4",
+        "type": "passport",
+        "url": "/api/placeholder/800/600",
+        "uploadedAt": "2024-12-08T09:00:00Z",
+        "verified": true
+      },
+      {
+        "id": "doc-5",
+        "type": "visa",
+        "url": "/api/placeholder/800/600",
+        "uploadedAt": "2024-12-08T09:05:00Z",
+        "verified": true
+      },
+      {
+        "id": "doc-6",
+        "type": "kyc",
+        "url": "/api/placeholder/800/600",
+        "uploadedAt": "2024-12-08T09:10:00Z",
+        "verified": true
+      }
+    ],
+    "accountInfo": {
+      "accountNumber": "ACC-987654321",
+      "accountHolder": "Maria Garcia",
+      "bankName": "Global Bank",
+      "sixMonthAverage": 18500.25,
+      "currentBalance": 19200.00,
+      "monthlyBalances": [
+        { "month": "2024-06", "balance": 17000 },
+        { "month": "2024-07", "balance": 18000 },
+        { "month": "2024-08", "balance": 18500 },
+        { "month": "2024-09", "balance": 19000 },
+        { "month": "2024-10", "balance": 18800 },
+        { "month": "2024-11", "balance": 18500 }
+      ]
+    },
+    "recommendations": [
+      {
+        "id": "rec-1",
+        "userId": "user-1",
+        "userName": "John Smith",
+        "comment": "Account history looks good. All documents verified.",
+        "createdAt": "2024-12-09T14:30:00Z"
+      }
+    ],
+    "history": [
+      {
+        "id": "hist-2",
+        "action": "submitted",
+        "userId": "user-1",
+        "userName": "John Smith",
+        "role": "branch_officer",
+        "status": "pending",
+        "timestamp": "2024-12-08T09:15:00Z"
+      },
+      {
+        "id": "hist-3",
+        "action": "recommendation_added",
+        "userId": "user-1",
+        "userName": "John Smith",
+        "role": "branch_officer",
+        "status": "under_review",
+        "comment": "Account history looks good. All documents verified.",
+        "timestamp": "2024-12-09T14:30:00Z"
+      }
+    ],
+    "amlFlags": [
+      {
+        "id": "flag-1",
+        "severity": "low",
+        "type": "Unusual Transaction Pattern",
+        "description": "Minor deviation in transaction frequency",
+        "detectedAt": "2024-12-09T10:00:00Z"
+      }
+    ],
+    "submittedAt": "2024-12-08T09:15:00Z",
+    "reviewedBy": "user-3",
+    "reviewedAt": "2024-12-09T10:00:00Z"
+  },
+  {
+    "id": "req-3",
+    "applicantName": "David Kim",
+    "applicantEmail": "david.kim@email.com",
+    "applicantPhone": "+1555123456",
+    "travelReason": "Medical treatment",
+    "destination": "Singapore",
+    "travelDate": "2024-12-18",
+    "returnDate": "2024-12-28",
+    "status": "escalated",
+    "documents": [
+      {
+        "id": "doc-7",
+        "type": "passport",
+        "url": "/api/placeholder/800/600",
+        "uploadedAt": "2024-12-05T11:00:00Z",
+        "verified": true
+      },
+      {
+        "id": "doc-8",
+        "type": "visa",
+        "url": "/api/placeholder/800/600",
+        "uploadedAt": "2024-12-05T11:05:00Z",
+        "verified": true
+      },
+      {
+        "id": "doc-9",
+        "type": "kyc",
+        "url": "/api/placeholder/800/600",
+        "uploadedAt": "2024-12-05T11:10:00Z",
+        "verified": true
+      }
+    ],
+    "accountInfo": {
+      "accountNumber": "ACC-555666777",
+      "accountHolder": "David Kim",
+      "bankName": "Regional Bank",
+      "sixMonthAverage": 8500.00,
+      "currentBalance": 9200.50,
+      "monthlyBalances": [
+        { "month": "2024-06", "balance": 8000 },
+        { "month": "2024-07", "balance": 8200 },
+        { "month": "2024-08", "balance": 8500 },
+        { "month": "2024-09", "balance": 8800 },
+        { "month": "2024-10", "balance": 8600 },
+        { "month": "2024-11", "balance": 8500 }
+      ]
+    },
+    "recommendations": [
+      {
+        "id": "rec-2",
+        "userId": "user-2",
+        "userName": "Sarah Johnson",
+        "comment": "Requires additional verification due to high-value transaction.",
+        "createdAt": "2024-12-06T10:00:00Z"
+      }
+    ],
+    "history": [
+      {
+        "id": "hist-4",
+        "action": "submitted",
+        "userId": "user-2",
+        "userName": "Sarah Johnson",
+        "role": "branch_officer",
+        "status": "pending",
+        "timestamp": "2024-12-05T11:15:00Z"
+      },
+      {
+        "id": "hist-5",
+        "action": "recommendation_added",
+        "userId": "user-2",
+        "userName": "Sarah Johnson",
+        "role": "branch_officer",
+        "status": "under_review",
+        "comment": "Requires additional verification due to high-value transaction.",
+        "timestamp": "2024-12-06T10:00:00Z"
+      },
+      {
+        "id": "hist-6",
+        "action": "escalated",
+        "userId": "user-3",
+        "userName": "Michael Chen",
+        "role": "operations",
+        "status": "escalated",
+        "comment": "High-risk transaction pattern detected. Requires Ops Head review.",
+        "timestamp": "2024-12-07T15:30:00Z"
+      }
+    ],
+    "amlFlags": [
+      {
+        "id": "flag-2",
+        "severity": "high",
+        "type": "High-Value Transaction",
+        "description": "Transaction amount exceeds normal threshold",
+        "detectedAt": "2024-12-07T15:00:00Z"
+      },
+      {
+        "id": "flag-3",
+        "severity": "medium",
+        "type": "Rapid Account Activity",
+        "description": "Unusual frequency of transactions in past month",
+        "detectedAt": "2024-12-07T15:00:00Z"
+      }
+    ],
+    "submittedAt": "2024-12-05T11:15:00Z",
+    "reviewedBy": "user-3",
+    "reviewedAt": "2024-12-07T15:00:00Z",
+    "escalatedTo": "user-5",
+    "escalatedAt": "2024-12-07T15:30:00Z",
+    "escalationReason": "High-risk transaction pattern detected. Requires Ops Head review."
+  }
+]
+
+
+
+
+
+
+
+
+
+
