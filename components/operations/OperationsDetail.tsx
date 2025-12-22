@@ -67,10 +67,10 @@ export function OperationsDetail({ request, userRole }: OperationsDetailProps) {
 
       {/* AML Flags */}
       {request.amlFlags && request.amlFlags.length > 0 && (
-        <Card className="border-orange-200 dark:border-orange-800">
+        <Card className="border-secondary/30 dark:border-secondary/30">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-orange-600" />
+              <AlertTriangle className="h-5 w-5 text-secondary" />
               <CardTitle>AML Flags</CardTitle>
             </div>
             <CardDescription>Anti-Money Laundering risk indicators</CardDescription>

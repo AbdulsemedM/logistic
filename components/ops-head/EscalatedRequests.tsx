@@ -25,12 +25,12 @@ export function EscalatedRequests({ requests }: EscalatedRequestsProps) {
   return (
     <div className="space-y-4">
       {requests.map((request) => (
-        <Card key={request.id} className="border-orange-200 dark:border-orange-800">
+        <Card key={request.id} className="border-secondary/30 dark:border-secondary/30">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle className="flex items-center gap-2">
-                  <AlertTriangle className="h-5 w-5 text-orange-600" />
+                  <AlertTriangle className="h-5 w-5 text-secondary" />
                   {request.applicantName}
                 </CardTitle>
                 <CardDescription>Request ID: {request.id}</CardDescription>
@@ -53,11 +53,11 @@ export function EscalatedRequests({ requests }: EscalatedRequestsProps) {
                 </div>
               </div>
               {request.escalationReason && (
-                <div className="rounded-lg bg-orange-50 dark:bg-orange-950 p-3">
-                  <p className="text-sm font-medium text-orange-900 dark:text-orange-100">
+                <div className="rounded-lg bg-secondary/10 dark:bg-secondary/20 p-3">
+                  <p className="text-sm font-medium text-secondary dark:text-secondary-foreground">
                     Escalation Reason:
                   </p>
-                  <p className="text-sm text-orange-800 dark:text-orange-200 mt-1">
+                  <p className="text-sm text-secondary dark:text-secondary-foreground/80 mt-1">
                     {request.escalationReason}
                   </p>
                 </div>

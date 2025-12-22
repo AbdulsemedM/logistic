@@ -13,7 +13,7 @@ const severityConfig: Record<string, { icon: React.ComponentType<{ className?: s
   low: {
     icon: Info,
     variant: 'outline',
-    color: 'text-blue-600',
+    color: 'text-primary',
   },
   medium: {
     icon: AlertTriangle,
@@ -23,7 +23,7 @@ const severityConfig: Record<string, { icon: React.ComponentType<{ className?: s
   high: {
     icon: AlertCircle,
     variant: 'destructive',
-    color: 'text-orange-600',
+    color: 'text-secondary',
   },
   critical: {
     icon: AlertCircle,
@@ -45,7 +45,7 @@ export function AMLFlags({ flags }: AMLFlagsProps) {
         const Icon = config.icon;
 
         return (
-          <Card key={flag.id} className="border-l-4 border-l-orange-500">
+          <Card key={flag.id} className="border-l-4 border-l-secondary">
             <CardContent className="p-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-start gap-3 flex-1">

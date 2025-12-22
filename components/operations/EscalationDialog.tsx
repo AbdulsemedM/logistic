@@ -51,7 +51,7 @@ export function EscalationDialog({ open, onOpenChange, requestId }: EscalationDi
       <DialogContent>
         <DialogHeader>
           <div className="flex items-center gap-2">
-            <AlertTriangle className="h-5 w-5 text-orange-600" />
+            <AlertTriangle className="h-5 w-5 text-secondary" />
             <DialogTitle>Escalate Request</DialogTitle>
           </div>
           <DialogDescription>

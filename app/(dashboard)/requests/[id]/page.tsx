@@ -3,6 +3,8 @@ import { redirect, notFound } from 'next/navigation';
 import { RequestDetail } from '@/components/requests/RequestDetail';
 import requestsData from '@/lib/mock-data/requests.json';
 import type { TravelCardRequest } from '@/lib/types/request';
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 
 async function getRequest(id: string, userRole: string): Promise<TravelCardRequest | null> {
   const requests = requestsData as TravelCardRequest[];
@@ -41,16 +43,36 @@ export default async function RequestDetailPage({
     notFound();
   }
 
+  // Format application ID (e.g., TC-2023-8492)
+  const formatApplicationId = (id: string) => {
+    // Convert req-1 to TC-2023-8492 format
+    const year = new Date().getFullYear();
+    const num = id.replace('req-', '');
+    return `TC-${year}-${num.padStart(4, '0')}`;
+  };
+
+  const applicationId = formatApplicationId(request.id);
+  const submittedDate = new Date(request.submittedAt);
+  const submittedBy = request.history.find((h) => h.action === 'submitted')?.userName || 'Unknown';
+
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Request Details</h1>
-        <p className="text-slate-600 dark:text-slate-400">
-          Review and manage travel card request
-        </p>
+      {/* Breadcrumbs */}
+      <div className="flex items-center gap-2 text-sm text-slate-600">
+        <Link href="/dashboard" className="hover:text-slate-900">Home</Link>
+        <ChevronRight className="h-4 w-4" />
+        <Link href="/requests" className="hover:text-slate-900">Applications</Link>
+        <ChevronRight className="h-4 w-4" />
+        <span className="text-slate-900 font-medium">{applicationId}</span>
       </div>
 
-      <RequestDetail request={request} userRole={user.role} />
+      <RequestDetail 
+        request={request} 
+        userRole={user.role}
+        applicationId={applicationId}
+        submittedDate={submittedDate}
+        submittedBy={submittedBy}
+      />
     </div>
   );
 }

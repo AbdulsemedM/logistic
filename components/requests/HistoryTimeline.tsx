@@ -18,11 +18,11 @@ const actionIcons: Record<string, React.ComponentType<{ className?: string }>> =
 };
 
 const actionColors: Record<string, string> = {
-  submitted: 'text-blue-600',
+  submitted: 'text-primary',
   approved: 'text-green-600',
   rejected: 'text-red-600',
   recommendation_added: 'text-purple-600',
-  escalated: 'text-orange-600',
+  escalated: 'text-secondary',
   reviewed: 'text-yellow-600',
 };
 

@@ -87,7 +87,7 @@ export function ReportsDashboard({ data }: ReportsDashboardProps) {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <AlertTriangle className="h-5 w-5 text-orange-600" />
+              <AlertTriangle className="h-5 w-5 text-secondary" />
               <div>
                 <p className="text-sm font-medium">Escalated</p>
                 <p className="text-2xl font-bold">{data.total.escalated}</p>

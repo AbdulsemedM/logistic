@@ -78,7 +78,8 @@ export async function getCurrentUser(): Promise<User | null> {
 export async function requireAuth(): Promise<User> {
   const user = await getCurrentUser();
   if (!user) {
-    throw new Error('Unauthorized');
+    const { redirect } = await import('next/navigation');
+    redirect('/login');
   }
   return user;
 }
@@ -86,7 +87,8 @@ export async function requireAuth(): Promise<User> {
 export async function requireRole(allowedRoles: UserRole[]): Promise<User> {
   const user = await requireAuth();
   if (!allowedRoles.includes(user.role)) {
-    throw new Error('Forbidden');
+    const { redirect } = await import('next/navigation');
+    redirect('/dashboard');
   }
   return user;
 }
